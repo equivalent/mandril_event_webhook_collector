@@ -2,17 +2,23 @@ require 'rails_helper'
 
 RSpec.describe "API V1 Events", type: :request do
   describe "POST /events" do
-    let(:trigger) { post api_v1_events_path }
+    let(:trigger) { post api_v1_events_path, body }
 
-    it "should respond 201 created" do
-      trigger
-      expect(response).to have_http_status(201)
-    end
+    context 'given body contains valid JSON' do
+      let(:body) { ExampleFiles.json_example('valid_mandril_event') }
 
-    it "should create raw event" do
-      expect { trigger }
-        .to change { Event.count }
-        .by 1
+      it "should respond 201 created" do
+        trigger
+        expect(response).to have_http_status(201)
+      end
+
+      it "should create raw event" do
+        expect { trigger }
+          .to change { Event.count }
+          .by 1
+
+        expect(Event.last.raw).to eq body
+      end
     end
   end
 end
