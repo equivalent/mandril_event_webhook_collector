@@ -1,0 +1,18 @@
+h1 Listing events
+
+table
+  thead
+    tr
+      th Raw
+      th Address
+      th Event type
+      th Action
+      th Occured at
+
+  tbody
+    - @events.each do |event|
+      tr
+        td = event.address
+        td = event.event_type
+        td = event.action
+        td = event.occured_at

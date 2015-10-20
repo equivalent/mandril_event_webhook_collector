@@ -43,7 +43,7 @@ group :development, :test do
 
   # rspec test lib
   gem 'rspec-rails'
-  gem 'factory_girl_rails'
+  gem 'factory_girl_rails', require: false
   gem 'database_cleaner'
 end
 
