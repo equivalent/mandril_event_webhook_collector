@@ -48,5 +48,24 @@ RSpec.configure do |config|
   #
   # The different available types are documented in the features, such as in
   # https://relishapp.com/rspec/rspec-rails/docs
-  config.infer_spec_type_from_file_location!
+  config.include FactoryGirl::Syntax::Methods
+
+  config.before :suite do
+    DatabaseCleaner.strategy = :transaction
+    DatabaseCleaner.clean_with(:truncation)
+  end
+
+  config.before :each do
+    DatabaseCleaner.start
+  end
+
+  config.after :each do
+    DatabaseCleaner.clean
+  end
+end
+
+module ExampleFiles
+  def self.json_path(name)
+    File.read(Rails.root.join('spec','fixuters','json', "#{name}.json"))
+  end
 end
