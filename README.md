@@ -1,8 +1,8 @@
 # Mandril Event Webhook Collector
 
-[![BuildStatus](https://travis-ci.org/equivalent/mandril_event_webhook_collector.svg?branch=travis-ci)](https://travis-ci.org/equivalent/mandril_event_webhook_collector)
+[![BuildStatus](https://travis-ci.org/equivalent/mandril_event_webhook_collector.svg)](https://travis-ci.org/equivalent/mandril_event_webhook_collector)
 
-Originaly test from Recruiter, but actually usefull Rails app that would:
+Sample Ruby on Rails that would:
 
 * receive webhooks from [Mandrill](https://www.mandrill.com/)
 * processes the webhook data and stores it into a suitable data store
@@ -14,12 +14,22 @@ Originaly test from Recruiter, but actually usefull Rails app that would:
   * click rate per email type
 
 
+## Usage
+
+Point Mandrill event webhook to `/api/v1/events`
+
+Processing of Events is done via background job so make sure delayed job
+is running `bundle exec bin/delayed_job start`
+
+
 ## Todo
 
-* caching
-* authentication & authorization
+* introduce Russion-Doll caching or level caching
+* implement policy clases for authentication & authorization
 * pagination
 * search with ransack
+* implement Sidekiq for background processing
+* extract Event#raw to some more sutable storage (Redis? Mongo?) 
 
 ## Related projects
 
