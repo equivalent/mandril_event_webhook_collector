@@ -1,5 +1,7 @@
 # Mandril Event Webhook Collector
 
+[![BuildStatus](https://travis-ci.org/equivalent/mandril_event_webhook_collector.svg?branch=travis-ci)](https://travis-ci.org/equivalent/mandril_event_webhook_collector)
+
 * can receive webhooks from Mandrill
 * processes the webhook data and stores it into a suitable data store
 * displays the following statistics
