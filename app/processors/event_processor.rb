@@ -10,13 +10,14 @@ class EventProcessor
 
   def save_raw
     event.raw = raw_input
-    event.save
+    event.save!
+    queue_processing
   end
 
   def process
     set_mandril_attributes(json)
     event.set_processed
-    event.save
+    event.save!
   end
 
   private
@@ -33,5 +34,9 @@ class EventProcessor
 
     def mandril_time_convertor(timestamp)
       Time.at(timestamp)
+    end
+
+    def queue_processing
+      ProcessEventJob.perform_later(event: event, raw_input: raw_input)
     end
 end

@@ -15,6 +15,17 @@ RSpec.describe EventProcessor do
 
       expect(Event.last.raw).to eq(raw_input)
     end
+
+    it 'should queue background job for processing event' do
+      expect(ProcessEventJob)
+        .to receive(:perform_later)
+        .with(event: event, raw_input: raw_input)
+        .and_call_original
+
+      expect { trigger }
+        .to change { Delayed::Job.count }
+        .by(1)
+    end
   end
 
   describe "#process" do

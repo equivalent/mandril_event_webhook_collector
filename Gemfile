@@ -34,6 +34,10 @@ gem 'slim-rails'
 # app server
 gem 'puma'
 
+# delay processing ...I should be using sidekick or rescue but no time
+gem 'delayed_job_active_record'
+gem 'daemons'
+
 # Use Capistrano for deployment
 # gem 'capistrano-rails', group: :development
 
