@@ -1,0 +1,51 @@
+h1.page-header= title
+.row
+  section.col-md-4
+    h2 Overal stats
+
+    ul.list-unstyled
+      li
+        strong Total number of emails sent:
+        = @total_sends
+      li
+        strong Total number of emails opened
+        = @total_opens
+      li
+        strong Total number of clicks
+        = @total_clicks
+
+  section.col-md-8
+    h2 Email Type specific stats
+
+    table.table.table-striped
+      thead
+        tr
+          th Type
+          th Open rate
+          th Click rate
+      tbody
+        - Event.email_types.each do |email_type|
+          tr
+            td= email_type
+            td= Event.with_type(email_type).opens.count
+            td= Event.with_type(email_type).clicks.count
+
+.row
+  section.col-md-12
+    h2 Listing events
+
+    table.table.table-striped
+      thead
+        tr
+          th Address
+          th Email type
+          th Event
+          th Occured at
+
+      tbody
+        - @events.each do |event|
+          tr
+            td = event.address
+            td = event.email_type
+            td = event.action
+            td = l(event.occured_at)

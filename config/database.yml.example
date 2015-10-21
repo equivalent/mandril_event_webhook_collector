@@ -1,0 +1,22 @@
+default: &default
+  adapter: postgresql
+  encoding: unicode
+  pool: 5
+
+development:
+  <<: *default
+  database: mewc_development
+  username: mewc
+  password: 'XXXX'
+
+test:
+  <<: *default
+  database: mewc_test
+  username: mewc
+  password: 'XXXX'
+
+production:
+  <<: *default
+  database: mewc_production
+  username: mewc
+  password: <%= ENV['MEWC_DATABASE_PASSWORD'] %>
