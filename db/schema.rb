@@ -19,7 +19,7 @@ ActiveRecord::Schema.define(version: 20151021001025) do
   create_table "events", force: :cascade do |t|
     t.text     "raw"
     t.string   "address"
-    t.string   "event_type"
+    t.string   "email_type"
     t.string   "action"
     t.datetime "occured_at"
     t.datetime "created_at",   null: false
