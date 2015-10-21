@@ -4,13 +4,18 @@ module Api
       respond_to :json
 
       def create
-        @event = Event.create(event_params)
-        respond_with @event, location: nil
+        @event = Event.new
+
+        EventProcessor
+          .new(raw_input: raw_mandril_input, event: @event )
+          .tap { |ep| ep.save_raw }
+
+        respond_with @event, location: nil, status: :ok
       end
 
       private
-        def event_params
-          { raw: request.body.read }
+        def raw_mandril_input
+          request.body.read
         end
     end
   end
