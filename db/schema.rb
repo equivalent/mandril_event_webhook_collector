@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20151021010615) do
+ActiveRecord::Schema.define(version: 20151021013843) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -42,5 +42,9 @@ ActiveRecord::Schema.define(version: 20151021010615) do
     t.datetime "updated_at",   null: false
     t.datetime "processed_at"
   end
+
+  add_index "events", ["action"], name: "index_events_on_action", using: :btree
+  add_index "events", ["address"], name: "index_events_on_address", using: :btree
+  add_index "events", ["email_type"], name: "index_events_on_email_type", using: :btree
 
 end

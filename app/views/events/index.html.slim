@@ -1,18 +1,47 @@
-h1 Listing events
+section
+  h1 Hardcore stats
 
-table
-  thead
-    tr
-      th Raw
-      th Address
-      th Event type
-      th Action
-      th Occured at
+  ul
+    li
+      strong Total number of emails sent:
+      = @total_sends
+    li
+      strong Total number of emails opened
+      = @total_opens
+    li
+      strong Total number of clicks
+      = @total_clicks
 
-  tbody
-    - @events.each do |event|
+section
+  h1 Email Type specific stats
+  - Event.email_types.each do |email_type|
+    table
+      thead
+        tr
+          th Type
+          th Open rate
+          th Click rate
+      tbody
+        tr
+          td= email_type
+          td= Event.with_type(email_type).opens.count
+          td= Event.with_type(email_type).clicks.count
+
+section
+  h1 Listing events
+
+  table
+    thead
       tr
-        td = event.address
-        td = event.event_type
-        td = event.action
-        td = event.occured_at
+        th Address
+        th Email type
+        th Event
+        th Occured at
+
+    tbody
+      - @events.each do |event|
+        tr
+          td = event.address
+          td = event.email_type
+          td = event.action
+          td = l(event.occured_at)
