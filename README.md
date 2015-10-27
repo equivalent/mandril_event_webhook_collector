@@ -13,6 +13,7 @@ Sample Ruby on Rails that would:
   * open rate per email type
   * click rate per email type
 
+Note: The application is overkill for simple task like this (no need for processor object, or for using heavy framework like Rails) I was just demonstrating particilar approach at one job interview.
 
 ## Usage
 
